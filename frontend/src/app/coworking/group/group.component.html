@@ -1,0 +1,49 @@
+<mat-card>
+  <h2 class="heading">Enter PIDs here</h2>
+  <div *ngIf="currentValue" class="members">
+    <!-- <div class="member-bars">Your PID has been recorded</div> -->
+    <form [formGroup]="pidForm" (ngSubmit)="confirmPIDs()">
+      <div formArrayName="pids">
+        <div *ngFor="let control of pids.controls; let i = index" class="member-bars">
+          <label *ngIf="i === 0" for="member-pid-{{ i }}">Your PID has been recorded </label>
+          <label *ngIf="i !== 0" for="member-pid-{{ i }}">Member PID {{ i + 1 }}</label>
+          <input type="text" [formControlName]="i" id="member-pid-{{ i }}" style="margin-left: 5px"
+            [hidden]="i === 0" />
+          <div *ngIf="submitted || control.dirty || control.touched" class="error">
+            <div *ngIf="control.errors?.['required']">PID is required</div>
+            <div *ngIf="control.errors?.['pattern']">
+              PID must be a 9 digit number
+            </div>
+            <div *ngIf="control.errors?.['uniquePID']">PID must be unique</div>
+          </div>
+          <div *ngIf="control.errors?.['pidDoesNotExist']">
+            PID does not exist
+          </div>
+        </div>
+      </div>
+      <div *ngIf="displayError" class="error-message">{{ errorMessage }}</div>
+      <br />
+      <button mat-stroked-button color="primary" type="submit" style="
+          /* color: white;
+          background-color: green; */
+          font-size: 15px;
+          padding: 10px;
+          margin-left: 65px;
+        ">
+        Confirm
+      </button>
+      <br />
+      <br />
+      <button mat-stroked-button color="warn" type="button" (click)="goBack()" style="
+          /* color: white;
+          background-color: #dc2f2f; */
+          font-size: 15px;
+          padding: 10px;
+          margin-top: 10px;
+          margin-left: 70px;
+        ">
+        Return
+      </button>
+    </form>
+  </div>
+</mat-card>

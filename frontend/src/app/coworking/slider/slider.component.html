@@ -1,0 +1,35 @@
+<mat-card>
+  <div style="padding: 30px; color: #4786c6">
+    <h3>
+      Enter the Number of people to be added to the group by adjusting slider:
+    </h3>
+    <h3>
+      <span style="color: red; margin: 25px; font-size: 25px">
+        {{ currentValue }}
+      </span>
+    </h3>
+    <br />
+    <input #slider style="width: 200px" type="range" min="2" max="4" [value]="currentValue"
+      (input)="updateValue(slider.value)" />
+    <br />
+    <br />
+    <br />
+    <button mat-stroked-button color="primary" (click)="onNavigate()" style="
+        /* color: white;
+        background-color: green; */
+        font-size: 15px;
+        padding: 10px;
+      ">
+      Confirm
+    </button>
+    <button mat-stroked-button color="warn" (click)="goBack()" style="
+        /* color: white;
+        background-color: #dc2f2f; */
+        font-size: 15px;
+        padding: 10px;
+        margin-left: 8px;
+      ">
+      Return
+    </button>
+  </div>
+</mat-card>
